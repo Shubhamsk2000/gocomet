@@ -5,6 +5,7 @@ target/
 .idea/
 .vscode/
 *.iml
+QA_Intern_Assignment1B.docx
 
 # OS files
 .DS_Store

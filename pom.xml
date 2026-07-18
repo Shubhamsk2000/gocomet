@@ -4,32 +4,32 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.gocomet</groupId>
-    <artifactId>casekaro-automation</artifactId>
+    <groupId>com.qaintern</groupId>
+    <artifactId>casekaro-cart-assignment</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <playwright.version>1.47.0</playwright.version>
-        <cucumber.version>7.18.1</cucumber.version>
-        <junit.platform.version>1.10.3</junit.platform.version>
-        <junit.jupiter.version>5.10.3</junit.jupiter.version>
-        <assertj.version>3.26.3</assertj.version>
+        <!-- NOTE: check Maven Central for the latest patch versions before you
+             submit — these are known-good recent versions but new ones ship often -->
+        <playwright.version>1.61.0</playwright.version>
+        <cucumber.version>7.34.4</cucumber.version>
+        <junit.version>4.13.2</junit.version>
     </properties>
 
     <dependencies>
-        <!-- Playwright -->
+        <!-- Playwright: drives the real browser (clicks, typing, waiting, etc.) -->
         <dependency>
             <groupId>com.microsoft.playwright</groupId>
             <artifactId>playwright</artifactId>
             <version>${playwright.version}</version>
         </dependency>
 
-        <!-- Cucumber -->
+        <!-- Cucumber: lets us write test scenarios in plain-English Gherkin -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -37,27 +37,16 @@
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
         </dependency>
 
-        <!-- JUnit 5 Platform (runs the Cucumber suite via CaseKaroTestRunner) -->
+        <!-- JUnit: the engine that actually runs the Cucumber tests -->
         <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-suite</artifactId>
-            <version>${junit.platform.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.jupiter.version}</version>
-        </dependency>
-
-        <!-- Assertions -->
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -67,20 +56,16 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
-                <configuration>
-                    <release>17</release>
-                </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.3.1</version>
-                <configuration>
-                    <includes>
-                        <include>**/*TestRunner.java</include>
-                    </includes>
-                </configuration>
+                <version>3.2.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.2.0</version>
             </plugin>
         </plugins>
     </build>
